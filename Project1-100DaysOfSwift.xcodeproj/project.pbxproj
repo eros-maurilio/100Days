@@ -81,12 +81,12 @@
 				140ECE2926BDD45B00AD6B14 /* AppDelegate.swift */,
 				140ECE2B26BDD45B00AD6B14 /* SceneDelegate.swift */,
 				140ECE2D26BDD45B00AD6B14 /* ViewController.swift */,
+				146E898E26C3496700EDC42E /* DetailViewController.swift */,
 				140ECE2F26BDD45B00AD6B14 /* Main.storyboard */,
 				140ECE3226BDD45C00AD6B14 /* Assets.xcassets */,
 				140ECE3426BDD45C00AD6B14 /* LaunchScreen.storyboard */,
 				140ECE3726BDD45C00AD6B14 /* Info.plist */,
 				140ECE3D26BDD73B00AD6B14 /* Content */,
-				146E898E26C3496700EDC42E /* DetailViewController.swift */,
 			);
 			path = "Project1-100DaysOfSwift";
 			sourceTree = "<group>";
