@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(scoreTapped))
+        
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "us", "uk"]
     
         button1.layer.borderWidth = 1
@@ -76,6 +78,13 @@ class ViewController: UIViewController {
         ac.addAction(UIAlertAction(title: actionTitle, style: .default, handler: askQuestion))
         
         return ac
+    }
+    
+    @objc func scoreTapped() {
+        let currentScore = "Your score is: \(score)"
+        let vc = UIActivityViewController(activityItems: [currentScore], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
     }
 }
 
