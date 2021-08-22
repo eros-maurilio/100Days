@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,6 +46,35 @@
             </objects>
             <point key="canvasLocation" x="63.768115942028992" y="32.8125"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="KKH-Xa-GFJ">
+            <objects>
+                <viewController storyboardIdentifier="Detail" id="nXY-2I-QeH" customClass="DetailViewController" customModule="ConsolidationProject1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kie-sN-jA4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="twh-IO-4sW">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qFL-Fy-ube"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                        <constraints>
+                            <constraint firstItem="twh-IO-4sW" firstAttribute="leading" secondItem="qFL-Fy-ube" secondAttribute="leading" id="1Rc-cV-dR4"/>
+                            <constraint firstItem="twh-IO-4sW" firstAttribute="top" secondItem="kie-sN-jA4" secondAttribute="top" id="2QR-El-QHQ"/>
+                            <constraint firstItem="twh-IO-4sW" firstAttribute="centerX" secondItem="kie-sN-jA4" secondAttribute="centerX" id="cxC-zL-NJy"/>
+                            <constraint firstItem="twh-IO-4sW" firstAttribute="centerY" secondItem="kie-sN-jA4" secondAttribute="centerY" id="eFb-as-wNe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="flagImageView" destination="twh-IO-4sW" id="QCd-L2-1c9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z0d-Gb-4ir" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="930" y="33"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="R1H-lq-YOz">
             <objects>
@@ -67,6 +97,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
