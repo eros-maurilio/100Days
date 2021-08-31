@@ -11,9 +11,6 @@ struct ContentView: View {
     @State private var wakeUp = Date()
     
     var body: some View {
-        let now = Date()
-        let tomorrow = Date().addingTimeInterval(86400)
-        let range = now...tomorrow
         
         
         
