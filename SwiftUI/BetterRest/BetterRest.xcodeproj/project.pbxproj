@@ -11,6 +11,7 @@
 		143BA0BB26DDB77900BB57CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BA0BA26DDB77900BB57CE /* ContentView.swift */; };
 		143BA0BD26DDB77C00BB57CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 143BA0BC26DDB77C00BB57CE /* Assets.xcassets */; };
 		143BA0C026DDB77C00BB57CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 143BA0BF26DDB77C00BB57CE /* Preview Assets.xcassets */; };
+		145BA0A126DFF52100D1949C /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 145BA0A026DFF52100D1949C /* SleepCalculator.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		143BA0BC26DDB77C00BB57CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		143BA0BF26DDB77C00BB57CE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		143BA0C126DDB77C00BB57CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		145BA0A026DFF52100D1949C /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 				143BA0BA26DDB77900BB57CE /* ContentView.swift */,
 				143BA0BC26DDB77C00BB57CE /* Assets.xcassets */,
 				143BA0C126DDB77C00BB57CE /* Info.plist */,
+				145BA0A026DFF52100D1949C /* SleepCalculator.mlmodel */,
 				143BA0BE26DDB77C00BB57CE /* Preview Content */,
 			);
 			path = BetterRest;
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145BA0A126DFF52100D1949C /* SleepCalculator.mlmodel in Sources */,
 				143BA0BB26DDB77900BB57CE /* ContentView.swift in Sources */,
 				143BA0B926DDB77900BB57CE /* BetterRestApp.swift in Sources */,
 			);
