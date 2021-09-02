@@ -12,53 +12,38 @@ struct ContentView: View {
     @State private var sleepAmout = 8.0
     @State private var coffeAmout = 1
     
-    @State private var alertTitle = ""
-    @State private var alertMessage = ""
-    @State private var isShowingAlert = false
-    
     var body: some View {
         NavigationView {
             Form {
-                VStack(alignment: .leading, spacing: 0){
-                    Text("When do you want to wake up?")
-                        .font(.headline)
-                    
+                Section(header: Text("When do you want to wake up?")) {
                     DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
                         .labelsHidden()
-                        .datePickerStyle(WheelDatePickerStyle())
                 }
                 
-                VStack(alignment: .leading, spacing: 0){
-                    
-                    Text("Desired amout of sleep")
-                        .font(.headline)
-                    
+                Section(header: Text("When do you want to wake up?")) {
                     Stepper(value: $sleepAmout, in: 4...12, step: 0.25) {
                         Text("\(sleepAmout, specifier: "%g")")
                     }
                 }
                 
-                VStack(alignment: .leading, spacing: 0){
-                    
-                    Text("Daily coffee intake")
-                        .font(.headline)
-                    
-                    Stepper(value: $coffeAmout, in: 1...20) {
-                        if coffeAmout == 1 {
-                            Text("1 Cup")
-                        } else {
-                            Text("\(coffeAmout) cups")
+                Section(header: Text("Daily coffe intake")){
+                    Picker("Coffe amount", selection: $coffeAmout) {
+                        ForEach(1...20, id: \.self) {
+                            Text("\($0)")
                         }
                     }
+                    .pickerStyle(WheelPickerStyle())
+                    
+                    Text(coffeAmout == 1 ? "1 Cup" : "\(coffeAmout) cups")
+                }
+                
+                Section(header: Text("Calculated Bed Time")) {
+                    Text("\(calculateBedTime)")
+                        .font(.title)
+
                 }
             }
             .navigationBarTitle("Better Rest")
-            .navigationBarItems(trailing:
-                                    Button(action: calculateBedTime,
-                                           label: { /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/}))
-            .alert(isPresented: $isShowingAlert, content: {
-                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            })
         }
     }
     
@@ -66,17 +51,18 @@ struct ContentView: View {
         var components = DateComponents()
         components.hour = 7
         components.minute = 0
-        return Calendar.current.date(from: components) ?? Date()
         
+        return Calendar.current.date(from: components) ?? Date()
     }
     
-    func calculateBedTime() {
+    var calculateBedTime: String {
         let model = SleepCalculator()
         
         let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
         let hour = (components.hour ?? 0) * 60 * 60
         let minute = (components.hour ?? 0) * 60
         
+        var message: String
         do {
             let prediction = try
                 model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmout, coffee: Double(coffeAmout))
@@ -86,18 +72,19 @@ struct ContentView: View {
             let formatter = DateFormatter()
             formatter.timeStyle = .short
             
-            alertMessage = formatter.string(from: sleepTime)
-            alertTitle = "Your ideal bedtime is: "
+            message = formatter.string(from: sleepTime)
+            
         } catch {
-            alertTitle = "Error"
-            alertMessage = "Sorry, there was a problem calculating your bedtime."
+            message = "Sorry, there was a problem calculating your bedtime."
         }
-        isShowingAlert = true
+        
+        return message
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
     }
 }
