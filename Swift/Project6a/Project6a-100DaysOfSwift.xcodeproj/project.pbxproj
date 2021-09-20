@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1449F90526C587E4002659CF /* Project2-100DaysOfSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project2-100DaysOfSwift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1449F90526C587E4002659CF /* Project6a-100DaysOfSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project6a-100DaysOfSwift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1449F90826C587E4002659CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1449F90A26C587E4002659CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1449F90C26C587E4002659CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		1449F90626C587E4002659CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1449F90526C587E4002659CF /* Project2-100DaysOfSwift.app */,
+				1449F90526C587E4002659CF /* Project6a-100DaysOfSwift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1449F90426C587E4002659CF /* Project2-100DaysOfSwift */ = {
+		1449F90426C587E4002659CF /* Project6a-100DaysOfSwift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1449F91926C587E6002659CF /* Build configuration list for PBXNativeTarget "Project2-100DaysOfSwift" */;
+			buildConfigurationList = 1449F91926C587E6002659CF /* Build configuration list for PBXNativeTarget "Project6a-100DaysOfSwift" */;
 			buildPhases = (
 				1449F90126C587E4002659CF /* Sources */,
 				1449F90226C587E4002659CF /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = "Project2-100DaysOfSwift";
+			name = "Project6a-100DaysOfSwift";
 			productName = "Project2-100DaysOfSwift";
-			productReference = 1449F90526C587E4002659CF /* Project2-100DaysOfSwift.app */;
+			productReference = 1449F90526C587E4002659CF /* Project6a-100DaysOfSwift.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -101,7 +101,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1449F90026C587E4002659CF /* Build configuration list for PBXProject "Project2-100DaysOfSwift" */;
+			buildConfigurationList = 1449F90026C587E4002659CF /* Build configuration list for PBXProject "Project6a-100DaysOfSwift" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -114,7 +114,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1449F90426C587E4002659CF /* Project2-100DaysOfSwift */,
+				1449F90426C587E4002659CF /* Project6a-100DaysOfSwift */,
 			);
 		};
 /* End PBXProject section */
@@ -322,7 +322,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1449F90026C587E4002659CF /* Build configuration list for PBXProject "Project2-100DaysOfSwift" */ = {
+		1449F90026C587E4002659CF /* Build configuration list for PBXProject "Project6a-100DaysOfSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1449F91726C587E6002659CF /* Debug */,
@@ -331,7 +331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1449F91926C587E6002659CF /* Build configuration list for PBXNativeTarget "Project2-100DaysOfSwift" */ = {
+		1449F91926C587E6002659CF /* Build configuration list for PBXNativeTarget "Project6a-100DaysOfSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1449F91A26C587E6002659CF /* Debug */,
