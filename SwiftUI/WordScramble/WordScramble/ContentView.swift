@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var errorTitle = ""
     @State private var errorMessage = ""
     @State private var showingError = false
+    @State private var score = 0
     
     var body: some View {
         NavigationView {
@@ -28,8 +29,20 @@ struct ContentView: View {
                     Image(systemName: "\($0.count).circle")
                     Text($0)
                 }
+                Form {
+                    Section(header: Text("Score")) {
+                        HStack {
+                            Spacer()
+                            Text("\(score)")
+                                .font(.title)
+                                .fontWeight(.black)
+                            Spacer()
+                        }
+                    }
+                }
             }
             .navigationBarTitle(rootWord)
+            .navigationBarItems(trailing: Button("New Word") { startGame() })
             .onAppear(perform: startGame)
             .alert(isPresented: $showingError) {
                 Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
@@ -51,6 +64,12 @@ struct ContentView: View {
             return
         }
         
+        guard isGreaterThan(word: answer) else {
+            wordError(title: "Word too short", message: "This is too short, think more.")
+        
+            return
+        }
+        
         guard isPossible(word: answer) else {
             wordError(title: "Word not recognized", message: "You can't just make them up, you know!")
             
@@ -64,6 +83,7 @@ struct ContentView: View {
         }
         
         usedWords.insert(answer, at: 0)
+        score += 1
         newWord = ""
     }
     
@@ -82,6 +102,8 @@ struct ContentView: View {
     }
     
     func isOriginal(word: String) -> Bool { !usedWords.contains(word) }
+    
+    func isGreaterThan(word: String) -> Bool { Array(word).count >= 3 }
     
     func isPossible(word: String) -> Bool {
         var tempWord = rootWord.lowercased()
