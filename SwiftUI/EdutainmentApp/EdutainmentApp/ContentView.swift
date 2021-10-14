@@ -14,6 +14,8 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            Spacer()
+
             Text("Table Game")
                 .font(.system(size: 36, weight: .bold, design: .rounded))
                 .foregroundColor(Color("DeepBlue"))
@@ -52,7 +54,22 @@ struct ContentView: View {
                     .colorMultiply(Color("Orange"))
                     .pickerStyle(.segmented)
                 }
-                
+                .padding(.bottom, 150)
+                Button {
+                    //action
+                } label: {
+                    HStack {
+                        Spacer()
+                        Text("Play")
+                            .bold()
+                        Spacer()
+                    }
+                    .padding(.vertical, 6)
+                    .background(Color("Orange"))
+                    .cornerRadius(5)
+                    .padding(.horizontal, 10)
+                }
+
             }
             .padding()
 

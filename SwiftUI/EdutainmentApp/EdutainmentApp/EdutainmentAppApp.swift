@@ -11,7 +11,9 @@ import SwiftUI
 struct EdutainmentAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                GameView(multiplicationTable: .constant(5))
+            }
         }
     }
 }
