@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var multiplicationTable = 1
     private var options = ["5", "10", "20", "All"]
     @State private var positionPicker = "5"
+    @State private var convertedPicker = 0
     
     var body: some View {
         VStack {
@@ -51,12 +52,18 @@ struct ContentView: View {
                             Text($0)
                         }
                     }
+                    .onChange(of: positionPicker, perform: { newValue in
+                        convertedPicker = conversion(num: newValue)
+                        print("Converted: \(convertedPicker)")
+                    })
                     .colorMultiply(Color("Orange"))
                     .pickerStyle(.segmented)
                 }
                 .padding(.bottom, 150)
-                Button {
-                    //action
+                
+                NavigationLink {
+                    GameView(multiplicationTable: $multiplicationTable, max: convertedPicker)
+                    
                 } label: {
                     HStack {
                         Spacer()
@@ -76,6 +83,8 @@ struct ContentView: View {
         }
         .foregroundColor(Color("DeepBlue"))
     }
+    
+    func conversion(num: String) -> Int { Int(num)! }
 }
 
 struct ContentView_Previews: PreviewProvider {

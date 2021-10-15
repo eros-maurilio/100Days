@@ -12,7 +12,7 @@ struct EdutainmentAppApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                GameView(multiplicationTable: .constant(5))
+                ContentView()
             }
         }
     }
