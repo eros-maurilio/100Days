@@ -11,7 +11,7 @@ struct ContentView: View {
     @State private var multiplicationTable = 1
     private var options = ["5", "10", "20", "All"]
     @State private var positionPicker = "5"
-    @State private var convertedPicker = 0
+    @State private var convertedPicker = 5
     
     var body: some View {
         VStack {
@@ -52,12 +52,11 @@ struct ContentView: View {
                             Text($0)
                         }
                     }
-                    .onChange(of: positionPicker, perform: { newValue in
-                        convertedPicker = conversion(num: newValue)
-                        print("Converted: \(convertedPicker)")
-                    })
                     .colorMultiply(Color("Orange"))
                     .pickerStyle(.segmented)
+                    .onChange(of: positionPicker) { newValue in
+                        convertedPicker = conversion(num: newValue)
+                    }
                 }
                 .padding(.bottom, 150)
                 

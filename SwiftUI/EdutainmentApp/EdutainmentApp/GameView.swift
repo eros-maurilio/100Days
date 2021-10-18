@@ -19,7 +19,7 @@ struct GameView: View {
     @State var result = 0
     @State var score = 0
     @State var isCorrect = true
-    var max: Int
+    @State var max: Int
     
     //@State var
     
@@ -28,6 +28,7 @@ struct GameView: View {
             Spacer()
             Text("What is \(multiplying) x \(multiplier)?")
                 .onAppear {
+                    print("AQUIIIIIIII \(max)")
                     getTable(upTo: multiplicationTable)
                     getSet(max: max)
                     questions(count: counter)
@@ -88,32 +89,56 @@ struct GameView: View {
     }
     
     func getSet(max: Int) {
-        let count = tableContent.count
-        rIndex = randomIndex(of: count)
-        print(count)
-        print(rIndex)
+        var count = tableContent.count
+//        print("da;ksd;askd;alskd;lak;das \(max)")
+//        print(count)
+        print("Primeiro rIndex: \(rIndex)")
+//
+//        print(tableContent)
         
-        for i in 1...max {
+        for _ in 1...max {
+            count = tableContent.count
+            
+            rIndex = randomIndex(of: count)
+            print("tableset: \(tableSet))")
+            print("tableCotent: \(tableContent))")
+            print("R INDEX: \(rIndex)")
+            print("tablecontent Index \(tableContent[rIndex])")
             tableSet.append(tableContent[rIndex])
             tableSet.append(tableContent[rIndex + 1])
             
             
             tableContent.remove(at: rIndex)
             tableContent.remove(at: rIndex)
-            
-            
-            rIndex = randomIndex(of: count)
+            print("first count: \(count)")
+            if rIndex != 0 { count -= 2 }
+            if count == 1 { count -= 1 }
+            print("Count: \(count)")
+            print("tableContent.count: \(tableContent.count)")
+            print("Table content array: \(tableContent)")
+            print("Random Indexx \(randomIndex(of: count))")
+            print("-----------------------------------------------------------------------")
         }
         print(tableSet)
     }
     
     func randomIndex(of: Int) -> Int {
-        var randomIndex = Int.random(in: 0...of)
+        var randomIndex: Int
+        let count = of - 1
         
-        while randomIndex % 2 != 0 {
-            randomIndex = Int.random(in: 0...of)
-        }
-        
+        repeat {
+            randomIndex = Int.random(in: 0...count)
+            if randomIndex == 0 {
+                break
+            }
+            print("------------------randomIndex----------------")
+            print(randomIndex)
+            print("------------------randomIndex----------------")
+
+
+        } while randomIndex % 2 != 0
+        print(randomIndex)
+
         return randomIndex
     }
     
