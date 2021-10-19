@@ -19,21 +19,18 @@ struct GameView: View {
     @State var result = 0
     @State var score = 0
     @State var isCorrect = true
-    @State var max: Int
-    
-    //@State var
+    @State var max: String
+    @State var converted = 0
+    @State var questionNum = 0
+    @State var isShowing = false
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
             Spacer()
             Text("What is \(multiplying) x \(multiplier)?")
-                .onAppear {
-                    print("AQUIIIIIIII \(max)")
-                    getTable(upTo: multiplicationTable)
-                    getSet(max: max)
-                    questions(count: counter)
-                }
-            
+                .onAppear { gameSetup() }
+
             Verification(code: $anwser)
                 .animation(.spring())
             
@@ -48,8 +45,10 @@ struct GameView: View {
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { isCorrect = true }
 
+                questionNum += 1
                 questions(count: counter)
                 anwser.removeAll()
+
             } label: {
                 HStack(alignment: .bottom) {
                     Spacer()
@@ -63,11 +62,26 @@ struct GameView: View {
                 .background(Color("DeepBlue").cornerRadius(10))
                 .padding()
                 .padding(.horizontal, 20)
+                .opacity(anwser.isEmpty ? 0.2 : 1)
 
             }
+            .disabled(anwser.isEmpty)
 
         }.overlay(Color.red.opacity(isCorrect ? 0 : 0.3))
+            .alert(isPresented: $isShowing) {
+                Alert(
+                    title: Text("Score"),
+                    message: Text("Your score was \(score)"),
+                    primaryButton: .default(Text("Exit"), action: {
+                    self.mode.wrappedValue.dismiss()
 
+                    }), secondaryButton: .default(Text("Play Again"), action: {
+                        reset()
+                    }))
+            }
+            .onChange(of: questionNum) { newValue in
+                if questionNum == converted { isShowing = true }
+            }
     }
     
     func arrayTransform(list: [String]) -> Int{
@@ -77,49 +91,37 @@ struct GameView: View {
             num += i
         }
         
-        return Int(num)!
+        return Int(num) ?? 0
     }
     
     func questions(count: Int) {
+        
+        if questionNum != converted {
         multiplying = tableSet[counter]
         multiplier = tableSet[counter + 1]
         
         counter += 2
-        
+        }
     }
     
     func getSet(max: Int) {
         var count = tableContent.count
-//        print("da;ksd;askd;alskd;lak;das \(max)")
-//        print(count)
-        print("Primeiro rIndex: \(rIndex)")
-//
-//        print(tableContent)
         
         for _ in 1...max {
             count = tableContent.count
             
             rIndex = randomIndex(of: count)
-            print("tableset: \(tableSet))")
-            print("tableCotent: \(tableContent))")
-            print("R INDEX: \(rIndex)")
-            print("tablecontent Index \(tableContent[rIndex])")
+            
             tableSet.append(tableContent[rIndex])
             tableSet.append(tableContent[rIndex + 1])
             
-            
             tableContent.remove(at: rIndex)
             tableContent.remove(at: rIndex)
-            print("first count: \(count)")
+
             if rIndex != 0 { count -= 2 }
             if count == 1 { count -= 1 }
-            print("Count: \(count)")
-            print("tableContent.count: \(tableContent.count)")
-            print("Table content array: \(tableContent)")
-            print("Random Indexx \(randomIndex(of: count))")
-            print("-----------------------------------------------------------------------")
+
         }
-        print(tableSet)
     }
     
     func randomIndex(of: Int) -> Int {
@@ -131,13 +133,7 @@ struct GameView: View {
             if randomIndex == 0 {
                 break
             }
-            print("------------------randomIndex----------------")
-            print(randomIndex)
-            print("------------------randomIndex----------------")
-
-
         } while randomIndex % 2 != 0
-        print(randomIndex)
 
         return randomIndex
     }
@@ -150,13 +146,41 @@ struct GameView: View {
             }
         }
     }
+    
+    func conversion(num: String) -> Int {
+        var converted = 0
+        
+        if Int(num) == nil {
+            converted = tableContent.count / 2
+        } else {
+            converted = Int(num)!
+        }
+
+        return converted
+    }
+    
+    func gameSetup() {
+        getTable(upTo: multiplicationTable)
+        converted = conversion(num: max)
+        getSet(max: converted)
+        questions(count: counter)
+        
+    }
+    
+    func reset() {
+        score = 0
+        rIndex = 0
+        multiplier = 0
+        multiplying = 0
+        counter = 0
+        result = 0
+        converted = 0
+        questionNum = 0
+        isShowing = false
+        tableSet = [Int]()
+        tableContent = [Int]()
+        
+        gameSetup()
+        
+    }
 }
-
-
-//struct GameView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationView {
-//            GameView(multiplicationTable: .constant(5))
-//        }
-//    }
-//}

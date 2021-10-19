@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var multiplicationTable = 1
-    private var options = ["5", "10", "20", "All"]
+    @State private var options = ["5", "10"]
     @State private var positionPicker = "5"
-    @State private var convertedPicker = 5
+    @State private var convertedPicker = "5"
     
     var body: some View {
         VStack {
             Spacer()
-
+            
             Text("Table Game")
                 .font(.system(size: 36, weight: .bold, design: .rounded))
                 .foregroundColor(Color("DeepBlue"))
@@ -36,6 +36,26 @@ struct ContentView: View {
                         .font(.system(size: 17, weight: .black, design: .rounded))
                     
                     Stepper("", value: $multiplicationTable, in: 1...12)
+                        .onChange(of: multiplicationTable, perform: { newValue in
+                            withAnimation(.linear(duration: 0.3)) {
+                                
+                                if newValue >= 2 && !options.contains("20"){
+                                    options.append("20")
+                                } else {
+                                    if newValue < 2 && options.contains("20") { options.removeLast()}
+                                    
+                                }
+                                
+                                if newValue >= 3 && !options.contains("All") {
+                                    options.append("All")
+                                    
+                                } else {
+                                    if newValue < 3 && options.contains("All") { options.removeLast()}
+                                    
+                                }
+                                
+                            }
+                        })
                         .colorMultiply(Color("Orange"))
                         .padding(.trailing, 3)
                 }
@@ -50,12 +70,14 @@ struct ContentView: View {
                     Picker("", selection: $positionPicker) {
                         ForEach(options, id: \.self) {
                             Text($0)
+                                .font(.title3)
+                                .animation(.easeInOut)
                         }
                     }
                     .colorMultiply(Color("Orange"))
                     .pickerStyle(.segmented)
                     .onChange(of: positionPicker) { newValue in
-                        convertedPicker = conversion(num: newValue)
+                        convertedPicker = String(newValue)
                     }
                 }
                 .padding(.bottom, 150)
@@ -67,23 +89,23 @@ struct ContentView: View {
                     HStack {
                         Spacer()
                         Text("Play")
+                            .font(.title2)
                             .bold()
                         Spacer()
                     }
-                    .padding(.vertical, 6)
+                    .padding(.vertical, 10)
                     .background(Color("Orange"))
                     .cornerRadius(5)
                     .padding(.horizontal, 10)
                 }
-
+                
             }
             .padding()
-
+            
         }
         .foregroundColor(Color("DeepBlue"))
     }
     
-    func conversion(num: String) -> Int { Int(num)! }
 }
 
 struct ContentView_Previews: PreviewProvider {
