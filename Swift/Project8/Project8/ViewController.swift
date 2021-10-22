@@ -118,9 +118,12 @@ class ViewController: UIViewController {
                 let letterButton = UIButton(type: .system)
                 letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
                 letterButton.setTitle("WWW", for: .normal)
+                letterButton.layer.cornerRadius = 10
+                letterButton.layer.borderColor = UIColor.gray.cgColor
+                letterButton.layer.borderWidth = 1
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
                 
-                let frame = CGRect(x: column * width, y: row * height, width: width, height: height)
+                let frame = CGRect(x: column * width + 10, y: row * height - 10, width: width - 20, height: height - 10)
                 letterButton.frame = frame
                 
                 buttonsView.addSubview(letterButton)
@@ -146,8 +149,11 @@ class ViewController: UIViewController {
     @objc func submitTapped(_ sender: UIButton) {
         guard let answerText = currentAnwser.text else { return }
         
+
         if let solutionPosition = solutions.firstIndex(of: answerText) {
             activatedButtons.removeAll()
+            
+            print(activatedButtons)
             
             var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
             
@@ -157,12 +163,28 @@ class ViewController: UIViewController {
             currentAnwser.text = ""
             score += 1
             
-            if score % 7 == 0 {
+            if isAllButtonPressed() {
                 let ac = UIAlertController(title: "Well done", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        } else {
+            let ac = UIAlertController(title: "Wrong", message: "That`s not correct!", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+            
+            score -= 1
         }
+    }
+    
+    func isAllButtonPressed() -> Bool {
+        for lettersButton in lettersButtons {
+            if lettersButton.isHidden == false {
+                return false
+            }
+        }
+        
+        return true
     }
     
     func levelUp(action: UIAlertAction) {
