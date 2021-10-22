@@ -153,8 +153,6 @@ class ViewController: UIViewController {
         if let solutionPosition = solutions.firstIndex(of: answerText) {
             activatedButtons.removeAll()
             
-            print(activatedButtons)
-            
             var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
             
             splitAnswers?[solutionPosition] = answerText

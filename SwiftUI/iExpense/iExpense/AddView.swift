@@ -13,6 +13,7 @@ struct AddView: View {
     @State private var name = ""
     @State private var type = "Personal"
     @State private var amount = ""
+    @State private var isShowingAlert = false
     static let types = ["Business", "Personal"]
     
     var body: some View {
@@ -29,6 +30,11 @@ struct AddView: View {
                 TextField("Amount", text: $amount)
                     .keyboardType(.numberPad)
             }
+            .alert(isPresented: $isShowingAlert) {
+                Alert(title: Text("This is not correct"), message: Text("In the amount field only numbers must be added!"), dismissButton: .default(Text("OK"), action: {
+                    amount = ""
+                }))
+            }
             .navigationTitle("Add new expense")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -37,6 +43,8 @@ struct AddView: View {
                             let item = ExpenseItem(name: self.name, type: self.type, amount: actualAmount)
                             self.expenses.items.append(item)
                             self.presentationMode.wrappedValue.dismiss()
+                        } else {
+                            isShowingAlert = true
                         }
                     }
                 }
