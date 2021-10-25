@@ -14,6 +14,8 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(findPetitions))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Credits", style: .plain, target: self, action: #selector(showCredits))
         
         performSelector(inBackground: #selector(fetchJson), with: nil)
     
@@ -22,9 +24,6 @@ class ViewController: UITableViewController {
     
     @objc func fetchJson() {
         let urlString: String
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(findPetitions))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Credits", style: .plain, target: self, action: #selector(showCredits))
         
         if navigationController?.tabBarItem.tag == 0 {
             
