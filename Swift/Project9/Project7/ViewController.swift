@@ -27,7 +27,7 @@ class ViewController: UITableViewController {
         
         if navigationController?.tabBarItem.tag == 0 {
             
-            urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
+            urlString =  "https://www.hackingwithswift.com/samples/petitions-1.json"
         } else {
             urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
             
