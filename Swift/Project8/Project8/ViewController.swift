@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     var activatedButtons = [UIButton]()
     var solutions = [String]()
     
-    var score = 0 {
+    var score = 0 {xco
         didSet {
             scoreLabel.text = "Score: \(score)"
         }
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
             buttonsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonsView.topAnchor.constraint(equalTo: submit.bottomAnchor, constant: 20),
             buttonsView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -20)
-        
+            
             
         ])
         
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
             }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
             self?.loadLevel()
         }
     }
-
+    
     @objc func letterTapped(_ sender: UIButton) {
         guard let buttonTitle = sender.titleLabel?.text else { return }
         
@@ -151,7 +151,7 @@ class ViewController: UIViewController {
     @objc func submitTapped(_ sender: UIButton) {
         guard let answerText = currentAnwser.text else { return }
         
-
+        
         if let solutionPosition = solutions.firstIndex(of: answerText) {
             activatedButtons.removeAll()
             
@@ -237,7 +237,7 @@ class ViewController: UIViewController {
         }
         
         lettersButtons.shuffle()
-
+        
         
         DispatchQueue.main.async { [weak self] in
             self?.cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
