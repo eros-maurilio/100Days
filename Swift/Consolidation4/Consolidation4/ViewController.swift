@@ -11,16 +11,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var allWords = [String]()
     let reuseIdentifier = "Cell"
     var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    var usedLetter = [String]()
     var transformWord: [String] = []
-    var wordChanges = "" {
+    var wordChanges = [String]() {
         didSet {
-            currentWordLabel.text = wordChanges
+            var word = ""
+            
+            for letter in wordChanges {
+                word += letter
+            }
+            
+            currentWordLabel.text = word
         }
     }
     @IBOutlet weak var currentWordLabel: UILabel!
     
     
-    override func viewDidLoad() { 
+    override func viewDidLoad() {
         super.viewDidLoad()
 
         if let startWordsURL = Bundle.main.url(forResource: "english", withExtension: "txt") {
@@ -33,25 +40,37 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             allWords = ["Error"]
         }
         
+        
         if let currentWord = allWords.randomElement() {
-            currentWordLabel.text = currentWord
             let array = Array(currentWord)
+            print(currentWord)
             
             for letter in array {
-                transformWord.append(letter)
+                let strLetter = String(letter)
+                transformWord.append(strLetter)
+                wordChanges.append("_ ")
             }
-            
-            for _ in 1..<transformWord.count {
-                wordChanges += "_ "
-            }
-            
-            print(Array(currentWord))
-            print(String(Array(currentWord)))
-
+            print(transformWord)
         }
+        
         title = "Hangman"
     }
-        
+    
+    func checkLetters(array: [String]) {
+        for letter in array {
+            let strLetter = String(letter)
+            
+            if usedLetter.contains(strLetter) {
+                guard let index = array.firstIndex(where: { $0 == letter }) else { return }
+                    
+                wordChanges.insert(strLetter, at: index)
+                wordChanges.remove(at: index)
+                currentWordLabel.text = strLetter
+                print(wordChanges)
+            }
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { alphabet.count }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,6 +86,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         print("tap at: \(indexPath.item)")
         print("\(alphabet[indexPath.item])")
         let cell = collectionView.cellForItem(at: indexPath)
+        
+        if !usedLetter.contains(alphabet[indexPath.item]) {
+            usedLetter.append(alphabet[indexPath.item])
+            checkLetters(array: transformWord)
+            print(usedLetter)
+        }
         
         cell?.layer.opacity = 0.5
         cell?.isSelected = true
