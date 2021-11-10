@@ -17,6 +17,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var wordChanges = [String]()
     var wordComplete = true
     var numOfErrors = 0
+    var cellsSelected = [IndexPath]()
     var score = 0
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -28,6 +29,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         title = "Hangman"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Game", style: .plain, target: self, action: #selector(newGameTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Score", style: .plain, target: self, action: #selector(scoreAlert))
         
         performSelector(inBackground: #selector(loadWords), with: nil)
     }
@@ -42,6 +44,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         ac.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
         present(ac, animated: true)
         
+    }
+    
+    @objc func scoreAlert() {
+        let ac = UIAlertController(title: "Score", message: "Your Score is: \(score)", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Ok", style: .default))
+        ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(ac, animated: true)
     }
     
     @objc func loadWords() {
@@ -69,21 +78,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         numOfErrors = 0
         usedLetter = [String]()
         imageView.image = UIImage(named: "hangman\(numOfErrors)")
-        
+        collectionView.reloadData()
+
     }
     
-    func letterTapped(_ str: String) {
+    func letterTapped(_ str: String) -> Bool{
         let letter = str
+        var isCorrect: Bool
         
         if currentWord.contains(letter) {
             usedLetter.append(letter)
             
             manageCorrectGuess()
+            isCorrect = true
             
         } else {
             manageIncorrectGuess()
-            
+            isCorrect = false
         }
+        
+        return isCorrect
     }
     
     func manageCorrectGuess() {
@@ -106,6 +120,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         if wordComplete {
             score += 2
+            print(score)
             collectionView.reloadData()
             
             let ac = UIAlertController(title: "Congratulation", message: nil, preferredStyle: .alert)
@@ -113,6 +128,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: { UIAlertAction in
                 self.performSelector(inBackground: #selector(self.loadWords), with: nil)
             }))
+            present(ac, animated: true)
             
             
 
@@ -154,6 +170,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         letterTapped(alphabet[indexPath.item])
         
         cell?.layer.opacity = (wordComplete ? 0 : 0.5)
+        
     }
 }
 
