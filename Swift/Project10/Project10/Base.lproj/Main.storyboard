@@ -62,7 +62,7 @@
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <size key="customSize" width="140" height="180"/>
                                 <connections>
-                                    <outlet property="imageView" destination="a8r-vI-8oa" id="Rdf-n4-WSs"/>
+                                    <outlet property="imageView" destination="pZJ-pn-RrX" id="bMm-D0-QdV"/>
                                     <outlet property="name" destination="l7y-Wa-yAG" id="1FG-JQ-b5C"/>
                                 </connections>
                             </collectionViewCell>
