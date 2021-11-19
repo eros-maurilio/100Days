@@ -70,15 +70,49 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let person = people[indexPath.item]
+        actionAlert(people, at: indexPath.item)
+    }
+    
+    func actionAlert(_ people: [Person], at index: Int) {
+        let ac = UIAlertController(title: "Chose", message: "What you wanna do?", preferredStyle: .alert)
         
+        ac.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.deleteItem(index: index)
+        }))
+        
+        ac.addAction(UIAlertAction(title: "Rename", style: .default, handler: { _ in
+            self.editName(people, at: index)
+        }))
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            self.editName(people, at: index)
+        }))
+        
+        present(ac, animated: true)
+    }
+    
+    
+    func deleteItem(index: Int) {
+        let ac = UIAlertController(title: "Delete", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
+            self.people.remove(at: index)
+            self.collectionView.reloadData()
+        }))
+        
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(ac, animated: true)
+        
+    }
+    
+    func editName(_ person: [Person], at index: Int) {
         let ac = UIAlertController(title: "Rename person", message: nil, preferredStyle: .alert)
         ac.addTextField()
         
         ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self, weak ac] _ in
             guard let newName = ac?.textFields?[0].text else { return }
             
-            person.name = newName
+            person[index].name = newName
             self?.collectionView.reloadData()
         })
         
